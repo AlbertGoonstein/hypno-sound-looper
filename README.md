@@ -1,3 +1,3 @@
-Self-contained HTML multi sound loop tool that works offline.
+## Self-contained HTML multi sound loop tool that works offline.
 
-https://albertgoonstein.github.io/hypno-sound-looper/
+You can download `index.html` and use it locally, or online at https://albertgoonstein.github.io/hypno-sound-looper/
