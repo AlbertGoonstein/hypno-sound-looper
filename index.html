@@ -1689,7 +1689,10 @@
       // Sound type select
       const select = card.querySelector('[data-field="soundType"]');
       if (select) {
-        select.value = loop.soundType;
+        if (!select.hasAttribute('data-initialized')) {
+          select.value = loop.soundType;
+          select.setAttribute('data-initialized', '1');
+        }
         select.addEventListener('change', e => {
           loop.soundType = e.target.value;
           if (loop.soundType !== 'custom') {
@@ -1705,18 +1708,25 @@
       // Interval input
       const intervalInput = card.querySelector('[data-field="interval"]');
       if (intervalInput) {
-        intervalInput.value = loop.interval;
+        if (!intervalInput.hasAttribute('data-initialized')) {
+          intervalInput.value = loop.interval;
+          intervalInput.setAttribute('data-initialized', '1');
+        }
         intervalInput.addEventListener('input', e => {
           loop.interval = parseFloat(e.target.value) || 0.1;
           if (loop.interval < 0.1) loop.interval = 0.1;
-          renderLoops();
+          const display = card.querySelector('.interval-display');
+          if (display) display.textContent = `${loop.interval}s`;
         });
       }
 
       // Volume range
       const volumeRange = card.querySelector('[data-field="volume"]');
       if (volumeRange) {
-        volumeRange.value = loop.volume * 100;
+        if (!volumeRange.hasAttribute('data-initialized')) {
+          volumeRange.value = loop.volume * 100;
+          volumeRange.setAttribute('data-initialized', '1');
+        }
         volumeRange.addEventListener('input', e => {
           loop.volume = parseInt(e.target.value) / 100;
           const volDisplay = card.querySelector('[data-field="volumeValue"]');
@@ -1727,7 +1737,10 @@
       // Custom URL input
       const urlInput = card.querySelector('[data-field="customUrl"]');
       if (urlInput) {
-        urlInput.value = loop.customUrl || '';
+        if (!urlInput.hasAttribute('data-initialized')) {
+          urlInput.value = loop.customUrl || '';
+          urlInput.setAttribute('data-initialized', '1');
+        }
         urlInput.addEventListener('input', e => handleUrlChange(loop, e.target.value));
       }
 
